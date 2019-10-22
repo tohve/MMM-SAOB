@@ -11,7 +11,6 @@ Module.register("MMM-SAOB", {
 	
 	// Default module config.
 	defaults: {
-		animationSpeed: 1000,
 		title: "Dagens ord från SAOB"
 	},
 
@@ -29,7 +28,6 @@ Module.register("MMM-SAOB", {
 
 	// Define start sequence.
 	start: function() {
-
 		Log.info("Starting module: " + this.name);
 		this.loaded = false;
 		this.updateWord();
@@ -62,10 +60,8 @@ Module.register("MMM-SAOB", {
 	/* updateWord()
 	 * Causes read of html from saob.se
 	 */
-	updateWord: function() {
-		
+	updateWord: function() {		
 		Log.info(this.name + ": Getting the Word!")
-		var self = this;
 		this.sendSocketNotification("GET_WORD", this.config);
 	},
 
@@ -76,10 +72,9 @@ Module.register("MMM-SAOB", {
 	 * payload - soab content
 	 */
 	socketNotificationReceived: function(notification, payload) {
-		let self = this;
 		if (notification === "THE_WORD") {
 			Log.info(this.name + ": Word received!");
-			self.processSAOB(payload);
+			this.processSAOB(payload);
 		}
 	},
 	
@@ -125,10 +120,6 @@ Module.register("MMM-SAOB", {
 			}
 		}
 		this.loaded = true;
-		this.updateDom(
-			this
-				.config
-				.animationSpeed
-		);
+		this.updateDom();
 	},
 });

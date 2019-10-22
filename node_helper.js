@@ -1,7 +1,7 @@
 'use strict';
 
 /* Magic Mirror
- * Module: MMM-SAOB
+ * Module: MMM-SAOB / node_helper
  *
  * By Tohmas Vennberg
  * MIT Licensed.
@@ -9,7 +9,6 @@
 
 const NodeHelper = require('node_helper');
 var request = require('request');
-var moment = require('moment');
 
 module.exports = NodeHelper.create({
 
@@ -42,7 +41,7 @@ module.exports = NodeHelper.create({
 				self.sendSocketNotification("THE_WORD", body);
 			}
 			else {
-				console.log(this.name + " error fetching word from web!" + error)
+				console.log(this.name + error)
 			}
 		});
 	}
