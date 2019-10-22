@@ -1,5 +1,6 @@
 # MMM-SAOB
 Today's word from SAOB displayed on your Magic Mirror
+
 Module for https://github.com/MichMich/MagicMirror
 
 # Module: Today's word from SAOB
