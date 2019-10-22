@@ -12,26 +12,11 @@ Module.register("MMM-SAOB", {
 	// Default module config.
 	defaults: {
 		animationSpeed: 1000,
-		title: "Dagens ord SAOB",
-		url: "https://www.saob.se"
-	},
-
-	// Define required scripts.
-	getScripts: function() {
-		return [
-			"moment.js"
-		];
+		title: "Dagens ord från SAOB"
 	},
 
 	getHeader: function() {
-		return "<span class='bright'>" + "Dagens ord " + "</span>";
-	},
-
-    // Define required scripts.
-	getStyles: function() {
-		return [
-			"MMM-SAOB.css"
-		];
+		return "<span class='bright'>" + this.config.title + "</span>";
 	},
 
 	// Define required translations.
@@ -44,62 +29,33 @@ Module.register("MMM-SAOB", {
 
 	// Define start sequence.
 	start: function() {
-		Log.info(
-			"Starting module: " +
-				this
-					.name
-		);
 
-		// Set locale.
-		moment.locale(
-			config.language
-		);
-
+		Log.info("Starting module: " + this.name);
 		this.loaded = false;
-		this.word = "no word";
 		this.updateWord();
-		this.updateTimer = null;
 	},
 
 	// Override dom generator.
 	getDom: function() {
-		var wrapper = document.createElement(
-			"div"
-		);
 
-		if (
-			!this
-				.loaded
-		) {
-			wrapper.innerHTML = this.translate(
-				"LOADING"
-			);
-			wrapper.innerHTML = "LOADING SAOB";
-			wrapper.className =
-				"dimmed light small";
+		var wrapper = document.createElement("div");
+
+		if (!this.loaded) {
+			wrapper.innerHTML = this.translate("LOADING");
+			wrapper.className =	"dimmed light small";
 			return wrapper;
 		}
 
 		// The word
-		var large = document.createElement(
-			"div"
-		);
-		large.className =
-			"large light";
+		var large = document.createElement("div");
+		large.className = "large light";
 			
-		var word = document.createElement(
-			"span"
-		);
+		var word = document.createElement("span");
 		word.innerHTML = this.word;
 
-		large.appendChild(
-			word
-		);
-
-		wrapper.appendChild(
-			large
-		);
-
+		large.appendChild(word);
+		wrapper.appendChild(large);
+		
 		return wrapper;
 	},
 
@@ -135,8 +91,8 @@ Module.register("MMM-SAOB", {
 	 * sender - ignored
 	 */
 	notificationReceived: function(notification, payload, sender) {
-		if (notification === "GET_WORD") {
-			Log.info(this.name + " Received GET_WORD. Payload: ", payload);
+		if (notification === "UPDATE_SAOB") {
+			Log.info(this.name + " Received UPDATE_SAOB. Payload: ", payload);
 			this.updateWord();
 		}
 	},
