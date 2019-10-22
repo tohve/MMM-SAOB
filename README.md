@@ -7,7 +7,7 @@ Module for https://github.com/MichMich/MagicMirror
 The `SAOB` module displays today's word from saob.se
 
 ## Screenshot
-![ScreenShot](screenshot_saob.png)
+![ScreenShot](screenshot_saob.PNG)
 
 ## Using the module
 
